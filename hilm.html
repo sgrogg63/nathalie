@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bienvenue, Pierre</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_Moon.jpg') no-repeat center center fixed;
+      background-size: cover;
+      text-align: center;
+    }
+    .container {
+      padding-top: 10vh;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0;
+    }
+    #clock {
+      font-size: 2.5em;
+      margin-top: 0;
+    }
+    #quote {
+      font-size: 1.2em;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    .links a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .search-bar {
+      margin-top: 20px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border-radius: 5px;
+      border: none;
+    }
+    .weather {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 1em;
+      background: rgba(0,0,0,0.5);
+      padding: 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bienvenue, Pierre</h1>
+    <div id="clock"></div>
+    <div id="quote"></div>
+    <div class="links">
+      <a href="https://www.google.com">Google</a>
+      <a href="https://www.youtube.com">YouTube</a>
+      <a href="https://fr.wikipedia.org">Wikipedia</a>
+      <a href="https://www.lemonde.fr">Le Monde</a>
+    </div>
+    <div class="search-bar">
+      <form action="https://www.google.com/search" method="get">
+        <input type="text" name="q" placeholder="Rechercher..." />
+      </form>
+    </div>
+  </div>
+  <div class="weather">
+    Royat 🌤️ 21°C<br />
+    <span id="date"></span>
+  </div>
+
+  <script>
+    // Horloge
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Date
+    const options = { weekday: 'long', hour: '2-digit', minute: '2-digit' };
+    document.getElementById('date').textContent = new Date().toLocaleString('fr-FR', options);
+
+    // Citation du jour
+    const citations = [
+      "Le succès n'est pas final. L'échec n'est pas fatal. C'est le courage de continuer qui compte. – Winston Churchill",
+      "La vie, c’est comme une bicyclette, il faut avancer pour ne pas perdre l’équilibre. – Albert Einstein",
+      "Fais de ta vie un rêve, et d’un rêve une réalité. – Antoine de Saint-Exupéry",
+      "Il n’y a qu’une façon d’échouer, c’est d’abandonner avant d’avoir réussi. – Georges Clemenceau",
+      "L’avenir appartient à ceux qui croient à la beauté de leurs rêves. – Eleanor Roosevelt",
+      "On ne voit bien qu’avec le cœur. L’essentiel est invisible pour les yeux. – Saint-Exupéry",
+      "Tout ce qui est fait avec amour est bien fait. – Vincent Van Gogh"
+    ];
+    const index = new Date().getDate() % citations.length;
+    document.getElementById("quote").textContent = citations[index];
+  </script>
+</body>
+</html>
+
